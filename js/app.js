@@ -10,9 +10,9 @@ Test this function by hand in the console to get it working, and when you think 
 // Write your code here
 function sum(a, b) { //eslint-disable-line
 
-  let total = a + b;
-  let returnMessage = `The sum of ${a} and ${b} is ${total}.`;
-  return [total, returnMessage];
+  let sumOfNums = a + b;
+  let sumString = `The sum of ${a} and ${b} is ${sumOfNums}.`;
+  return [sumOfNums, sumString];
 }
 
 // Here is the test for sum(); uncomment it to run it
@@ -31,8 +31,8 @@ Test this function by hand in the console to get it working, and when you think 
 // Write your code here
 function multiply(a, b) { //eslint-disable-line
   let product = a * b;
-  let message = `The product of ${a} and ${b} is ${product}.`;
-  return [product, message];
+  let productString = `The product of ${a} and ${b} is ${product}.`;
+  return [product, productString];
 
 }
 
@@ -55,16 +55,14 @@ Test this function by hand in the console to get it working, and when you think 
 // Write your code here
 
 function sumAndMultiply(a, b, c) { //eslint-disable-line
-  let product = multiply(a, b);
-  let product1 = multiply(product, c);
-  let sum1 = sum(a, b);
 
+  let sumOfNums = sum(sum(a, b)[0], c)[0];
+  let product = multiply(multiply(a, b)[0], c)[0];
 
-  let message1 = `${a} and ${b} and ${c} sum to ${sum1 + c}.`;
-  let message2 = `The product of ${a} and ${b} and ${c} is ${product1}.`;
+  let sumString = `${a} and ${b} and ${c} sum to ${sumOfNums}.`;
+  let productString = `The product of ${a} and ${b} and ${c} is ${product}.`;
 
-  return [sum1, product1, message1, message2];
-
+  return [sumOfNums, product, sumString, productString];
 }
 
 // Here is the test for sumAndMultiply(); uncomment it to run it
@@ -74,9 +72,9 @@ testSumAndMultiply(4, 7, 5);
 
 /////////////////////////////////////
 /* Problem 4
-Write a function called sumArray() that takes in an array of numbers as its single argument and then returns an array where the first element is the sum of the numbers in the array, and the second element is a string that EXACTLY follows this example and uses the values that were input into the function:
+Write a function called sumArray() that takes in an array of numbers as its single argument and then returns an array where the first element is the sum of the numbers in the array, and the second element is a string that EXACTLY follows this example and uses the values that were input into the function:4
 
-"2,3,4 was passed in as an array of numbers, and 9 is their sum."
+"2,3, was passed in as an array of numbers, and 9 is their sum."
 
 IMPORTANT DETAIL: You may not use the arithmetic operator + in this function. To do addition, use your sum() function that you've already created. You're going to have to be resourceful to figure out how to do this. However, you may continue to use the + operator for string concatenation.
 
@@ -86,8 +84,16 @@ Test this function by hand in the console to get it working, and when you think 
 let testArray = [2, 3, 4]; //eslint-disable-line
 
 function sumArray(sumArr) { //eslint-disable-line
+  let sumOfSumArr = 0;
+  for (let i = 0; i < sumArr.length; i++) {
+    sumOfSumArr = sum(sumOfSumArr, sumArr[i])[0];
+  }
 
+  let joinSum = sumArr.join(',');
+  let sumString = `${joinSum} was passed in as an array of numbers, and ${sumOfSumArr} is their sum.`;
+  return [sumOfSumArr, sumString];
 }
+
 
 // Here is the test for sumArray(); uncomment it to run it
 
