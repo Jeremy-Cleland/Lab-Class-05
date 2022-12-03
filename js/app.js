@@ -84,8 +84,16 @@ Test this function by hand in the console to get it working, and when you think 
 let testArray = [2, 3, 4]; //eslint-disable-line
 
 function sumArray(sumArr) { //eslint-disable-line
+  let sumOfSumArr = 0;
+  for (let i = 0; i < sumArr.length; i++) {
+    sumOfSumArr = sum(sumOfSumArr, sumArr[i])[0];
+  }
 
+  let joinSum = sumArr.join(',');
+  let sumString = `${joinSum} was passed in as an array of numbers, and ${sumOfSumArr} is their sum.`;
+  return [sumOfSumArr, sumString];
 }
+
 
 // Here is the test for sumArray(); uncomment it to run it
 
